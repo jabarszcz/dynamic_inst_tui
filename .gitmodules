@@ -1,0 +1,6 @@
+[submodule "server/mongoose"]
+	path = server/mongoose
+	url = https://github.com/cesanta/mongoose
+[submodule "server/frozen"]
+	path = server/frozen
+	url = https://github.com/cesanta/frozen
