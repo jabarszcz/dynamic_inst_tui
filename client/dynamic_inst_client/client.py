@@ -2,9 +2,9 @@
 import argparse
 import sys
 
-from uftrace_dynamic_client.communicator import Communicator, CommunicatorException
-from uftrace_dynamic_client.ui import Ui
-from uftrace_dynamic_client.util import Filter
+from dynamic_inst_client.communicator import Communicator, CommunicatorException
+from dynamic_inst_client.ui import Ui
+from dynamic_inst_client.util import Filter
 
 
 def print_err(*args, **kwargs):
@@ -25,7 +25,7 @@ def run_ui(args):
     try:
         comm.connect(args.port)
     except CommunicatorException:
-        print_err('Could not connect, is uftrace started on port %d ?' % args.port)
+        print_err('Could not connect, is the server started on port %d ?' % args.port)
         exit(1)
     try:
         ui = Ui(comm)
@@ -54,7 +54,7 @@ def run_list(args):
                     s = '(nopped)'
                 print(f, s)
     except CommunicatorException:
-        print_err('Could not connect, is uftrace started on port %d ?' % args.port)
+        print_err('Could not connect, is the server started on port %d ?' % args.port)
         exit(1)
     except ValueError:
         print('Invalid filter')
@@ -71,7 +71,7 @@ def run_set(args, value):
     try:
         comm.connect(args.port)
     except CommunicatorException:
-        print_err('Could not connect, is uftrace started on port %d ?' % args.port)
+        print_err('Could not connect, is the server started on port %d ?' % args.port)
         exit(1)
     try:
         f = {f: value for f in args.functions}

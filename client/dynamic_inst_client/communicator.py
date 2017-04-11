@@ -12,7 +12,7 @@ class CommunicatorException(Exception):
 
 class Communicator:
     """
-    Objects that communicates with the uftrace'd process
+    Objects that communicates with the server process
     :ivar __session: The HTTP session, None if not connected
     :ivar __url: The HTTP url, None if not connected
     :ivar __cache: The function list cache, used so that there is not a request each time we read the function list
@@ -27,7 +27,7 @@ class Communicator:
 
     def connect(self, port):
         """
-        Connects to the uftrace'd process
+        Connects to the server process
         :param port: The port
         :raise ValueError: When the port is invalid
         """
@@ -40,7 +40,7 @@ class Communicator:
 
     def disconnect(self):
         """
-        Disconnects from the uftrace'd process
+        Disconnects from the server process
         """
         if self.__session is not None:
             self.__session.close()
@@ -65,7 +65,7 @@ class Communicator:
         """
         Function list setter
         :param funcs: The dictionary of functions to modify
-        :raise CommunicatorException: If one of the function in the list is not in the uftrace'd process
+        :raise CommunicatorException: If one of the function in the list is not in the server process
         """
         self.__check_connected()
         for f in funcs:
@@ -97,7 +97,7 @@ class Communicator:
 
     def __request_put_function_list(self):
         """
-        Does a HTTP PUT to set the function status in the uftrace'd process, updates the function list at the same time
+        Does a HTTP PUT to set the function status in the server process, updates the function list at the same time
         """
         self.__check_connected()
         try:

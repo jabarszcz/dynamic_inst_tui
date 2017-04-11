@@ -2,7 +2,7 @@ from functools import partial
 
 import urwid as uw
 
-from uftrace_dynamic_client.util import Filter
+from dynamic_inst_client.util import Filter
 
 
 def make_enableable(obj):
