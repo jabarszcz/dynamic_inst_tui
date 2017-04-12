@@ -281,6 +281,8 @@ class Ui:
                 "'q'/'Ctrl+c'\n" \
                 "  to quit"
 
+    MINI_HELP_TEXT = "Press 'h' or '?' for help"
+
     def __init__(self, communicator):
         self.comm = communicator
 
@@ -297,9 +299,11 @@ class Ui:
         self.ui_filter_edit.base_widget.disable()
 
         self.ui_help = uw.LineBox(uw.Filler(uw.Text(Ui.HELP_TEXT)))
+        self.mini_help = uw.Filler(uw.Text(Ui.MINI_HELP_TEXT))
 
-        self.cols = uw.Columns([('weight', 60, self.ui_func_list_box), ('weight', 40, self.ui_help)])
-        self.top = uw.Pile([self.cols, (3, self.ui_filter_edit_box)])
+        self.main = uw.Pile([self.ui_func_list_box, (3, self.ui_filter_edit_box), (1, self.mini_help)])
+
+        self.top = uw.Padding(self.main, left=1, right=1)
 
         self.loop = uw.MainLoop(self.top,
                                 palette=Ui.PALETTE,
@@ -321,7 +325,12 @@ class Ui:
 
     def __handle_keyboard(self, key):
         if key == 'q':
-            raise uw.ExitMainLoop()
+            if self.top.original_widget == self.ui_help:
+                self.top.original_widget = self.main
+            else:
+                raise uw.ExitMainLoop()
+        elif key == 'h' or key == '?':
+            self.top.original_widget = self.ui_help
         elif key == 'f' or key == '/':
             self.ui_func_list.disable()
             self.ui_filter_edit.base_widget.enable()
