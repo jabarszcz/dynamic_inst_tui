@@ -318,7 +318,7 @@ class Ui:
             self.func_list_walker.notify_change()
             self.ui_func_list.enable()
             self.ui_filter_edit.base_widget.disable()
-            self.top.set_focus(0)
+            self.main.set_focus(0)
             self.ui_filter_edit_box.set_attr_map({None: 'edit.normal'})
         except ValueError:
             self.ui_filter_edit_box.set_attr_map({None: 'edit.error'})
@@ -334,7 +334,7 @@ class Ui:
         elif key == 'f' or key == '/':
             self.ui_func_list.disable()
             self.ui_filter_edit.base_widget.enable()
-            self.top.set_focus(1)
+            self.main.set_focus(1)
         elif key == 's':
             self.func_list_walker.select_all()
         elif key == 'c':
