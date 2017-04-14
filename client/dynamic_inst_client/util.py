@@ -95,5 +95,5 @@ class Filter:
             if self.__selected_filter == 'unselected' and selected:
                 return False
         if self.__regex is not None:
-            return self.__regex.match(func) is not None
+            return self.__regex.search(func) is not None
         return True
